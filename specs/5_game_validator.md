@@ -13,8 +13,8 @@
 1. Close game - Redeemer `CloseGame`
 
    - Only 1 reference input from oracle address
-   - The transaction is signed by all `players`
-   - The transaction is signed by all `operation_key`
+   - The transaction is signed by `players` with at leat `quorem`
+   - The transaction is signed by `operation_key`
 
 2. Cancel game - Redeemer `CancelGame`
 

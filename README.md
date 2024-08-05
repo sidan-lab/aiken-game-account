@@ -1,55 +1,55 @@
 # aiken-game-account
 
-Write validators in the `validators` folder, and supporting functions in the `lib` folder using `.ak` as a file extension.
+The repo serves the source code for game account. Game account is a set of smart contracts where the app owner takes away the immediate spending power of users in exchange for seamless UX for DApps.
 
-For example, as `validators/always_true.ak`
+## Setup
 
-```gleam
-validator {
-  fn spend(_datum: Data, _redeemer: Data, _context: Data) -> Bool {
-    True
-  }
-}
-```
+The are 2 steps of setting up the applications:
 
-## Building
+1. Minting `oracle_nft`, one time minting policy with empty token name with quantity of 1.
 
-```sh
-aiken build
-```
+   - Validation: 1.1
 
-## Testing
+2. Sending the the `oracle_nft` to `oracle_validator` with initialized inline datum of specifying all compile scripts, addresses with owner keys.
 
-You can write tests in any module using the `test` keyword. For example:
+   - Validation: N/A
 
-```gleam
-test foo() {
-  1 + 1 == 2
-}
-```
+## User Actions
 
-To run all tests, simply do:
+1. Account Setup. Sending reference script to account for later use
 
-```sh
-aiken check
-```
+   - Validation: N/A
 
-To run only tests matching the string `foo`, do:
+2. Deposit. Depoiting value into account.
 
-```sh
-aiken check -m foo
-```
+   - Validation: N/A
 
-## Documentation
+3. Start Game. From account, sending value to game validator
 
-If you're writing a library, you might want to generate an HTML documentation for it.
+   - Validation: 4.1
 
-Use:
+4. Close Game. Authorizing the value unlock from game validator
 
-```sh
-aiken docs
-```
+   - Validation: 5.1
 
-## Resources
+5. Cancel Game. Withdrawing value from game with all user's signature for a staled game.
 
-Find more on the [Aiken's user manual](https://aiken-lang.org).
+   - Validation: 5.2
+
+6. Withdrawal. Withdrawing value from app.
+
+   - Validation: 4.1 / 2.1 + 2.2 + 4.3 + 4.4
+
+## Admin Actions
+
+1. Rotate app keys. Changing the key configuration for running games and stopping app.
+
+   - Validation: 3.1
+
+2. Stop app. Burning oracle and stop app operation.
+
+   - Validation: 1.2 + 3.2
+
+3. Shuffle account utxos. Help users to change account utxos in a distribution easier for game operation.
+
+   - Validation: 4.2

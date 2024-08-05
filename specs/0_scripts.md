@@ -23,6 +23,10 @@ There are in total 5 scripts for the game account to work. Below provide descrip
      - 4.3: Emergency Unlock Phase 1 - [specification](./4_account/4.3_emergency_unlock_phase1.md)
      - 4.4: Emergency Unlock Phase 2- [specification](./4_account/4.4_emergency_unlock_phase2.md)
 
+5. Game Validator - [specification](./5_game_validator.md)
+
+   - The script guarding in game value. App owner could decide the winner with winner's multisig for unlock.
+
 ## Param Dependency Graph
 
 1. First layer
