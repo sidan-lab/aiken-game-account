@@ -1,0 +1,21 @@
+name = "sidan-lab/aiken-game-account"
+version = "0.0.0"
+compiler = "v1.0.29-alpha"
+plutus = "v2"
+license = "Apache-2.0"
+description = "Aiken contracts for project 'sidan-lab/aiken-game-account'"
+
+[repository]
+user = "sidan-lab"
+project = "aiken-game-account"
+platform = "github"
+
+[[dependencies]]
+name = "aiken-lang/stdlib"
+version = "1.9.0"
+source = "github"
+
+[[dependencies]]
+name = "sidan-lab/aiken-utils"
+version = "0.1.6-beta"
+source = "github"
