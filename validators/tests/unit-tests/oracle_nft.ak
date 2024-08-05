@@ -1,7 +1,7 @@
 use aiken/transaction.{Mint, ScriptContext, placeholder}
 use aiken/transaction/value.{PolicyId, from_lovelace}
 use aiken_game_account/types.{RBurn, RMint}
-use aiken_game_account/validators/oracle_nft.{oracle_nft_logic}
+use oracle_nft.{oracle_nft}
 use sidan_placeholder/address.{mock_pub_key_address}
 use sidan_placeholder/builder.{complete, mint, new_tx_tester, tx_in}
 use sidan_placeholder/key_hex.{mock_policy_id}
@@ -27,7 +27,7 @@ test success_mint() {
 
   let ctx = ScriptContext { purpose: Mint(policy_id), transaction: tx }
 
-  oracle_nft_logic(input_utxo, redeemer, ctx)
+  oracle_nft(input_utxo, redeemer, ctx)
 }
 
 test fail_mint_no_utxo_ref_supply() {
@@ -37,7 +37,7 @@ test fail_mint_no_utxo_ref_supply() {
   let ctx =
     ScriptContext { purpose: Mint(policy_id), transaction: placeholder() }
 
-  !oracle_nft_logic(mock_utxo_ref(0, 0), redeemer, ctx)
+  !oracle_nft(mock_utxo_ref(0, 0), redeemer, ctx)
 }
 
 test success_burn() {
@@ -50,7 +50,7 @@ test success_burn() {
       |> complete()
 
   let ctx = ScriptContext { purpose: Mint(policy_id), transaction: tx }
-  oracle_nft_logic(mock_utxo_ref(0, 0), redeemer, ctx)
+  oracle_nft(mock_utxo_ref(0, 0), redeemer, ctx)
 }
 
 test success_burn_with_other_minting() {
@@ -63,7 +63,7 @@ test success_burn_with_other_minting() {
       |> mint(True, mock_policy_id(1), "", -1)
       |> complete()
   let ctx = ScriptContext { purpose: Mint(policy_id), transaction: tx }
-  oracle_nft_logic(mock_utxo_ref(0, 0), redeemer, ctx)
+  oracle_nft(mock_utxo_ref(0, 0), redeemer, ctx)
 }
 
 test fail_burn_with_mint() {
@@ -76,7 +76,7 @@ test fail_burn_with_mint() {
       |> complete()
 
   let ctx = ScriptContext { purpose: Mint(policy_id), transaction: tx }
-  !oracle_nft_logic(mock_utxo_ref(0, 0), redeemer, ctx)
+  !oracle_nft(mock_utxo_ref(0, 0), redeemer, ctx)
 }
 
 test fail_burn_with_mix() {
@@ -90,5 +90,5 @@ test fail_burn_with_mix() {
       |> complete()
 
   let ctx = ScriptContext { purpose: Mint(policy_id), transaction: tx }
-  !oracle_nft_logic(mock_utxo_ref(0, 0), redeemer, ctx)
+  !oracle_nft(mock_utxo_ref(0, 0), redeemer, ctx)
 }
